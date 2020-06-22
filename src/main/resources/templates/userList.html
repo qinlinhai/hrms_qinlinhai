@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>员工列表</title>
+</head>
+<body>
+<div th:text="'hello thymeleaf'"></div>
+<br/>
+
+<!--<shiro:authenticated shiro:authenticated="true" >-->
+<!--    <h2>测试数据</h2>-->
+<!--</shiro:authenticated>-->
+
+<!--<shiro:hasRole th:name="${name}">
+        数据
+</shiro:hasRole>-->
+<!--<div th:text="${str}"></div>-->
+<!--<shiro:hasAllRoles>ddd</shiro:hasAllRoles>-->
+<div th:each="role : ${session.roleList}">
+    <input th:value="${role.getRname()}">
+    <input th:value="${role.getMname()}">
+</div>
+<form action="/user/queryByName" method="get">
+    <input type="text" name="username">
+    <input type="submit" value="查询">
+</form>
+
+<a href="/dept/selectAll">新增</a>
+<table border="1" style="width:100%" th:if="${list}!=null">
+    <tr>
+        <th>编号</th>
+        <th>名字</th>
+        <th>邮件</th>
+        <th>电话</th>
+        <th>部门</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    <tr th:each="emp,stat : ${list}">
+        <td th:text="${emp.getUserid()}"></td>
+        <td th:text="${emp.getUsername()}"></td>
+        <td th:text="${emp.getEmail()}"></td>
+        <td th:text="${emp.getPhonenum()}"></td>
+        <td th:text="${emp.getDname()}"></td>
+        <td th:if="${emp.getStatus() == 1}">正常</td>
+        <td th:if="${emp.getStatus() == 0}">错误</td>
+        <td ><a th:href="@{/user/delete(userid=${emp.getUserid()})}">删除</a>
+            <a th:href="@{/user/findById(username=${emp.getUsername()})}">修改</a>
+        </td>
+    </tr>
+</table>
+<a href="/logout">退出</a>
+
+</body>
+</html>

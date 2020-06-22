@@ -1,0 +1,30 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /
+#配置数据源
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ceshi?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: qinlinhai
+    type: com.alibaba.druid.pool.DruidDataSource
+  thymeleaf:
+    cache: false #关闭缓存
+  mvc:
+    date-format: yyyy-MM-dd
+  jackson:
+    date-format: yyyy-MM-dd
+#mybatis相关配置
+mybatis:
+  type-aliases-package: com.qin.entity
+  mapper-locations: classpath:mapper/*.xml
+
+#控制日志打印sql命令
+#level:指定mapper接口所在的包
+logging:
+  level:
+    com:
+      mrlang:
+        mapper: debug

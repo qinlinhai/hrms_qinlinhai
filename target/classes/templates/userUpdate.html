@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/user/insert" method="get">
+姓名<input type="text" name="username"></br>
+电话<input type="text" name="phonenum"></br>
+邮件<input type="text" name="email"></br>
+    部门
+    <select name="deptid">
+        <div th:each="dept,stat : ${deptList}">
+            <option th:text="${dept.getDname()}" th:value="${dept.getDeptid()}"></option>
+        </div>
+    </select></br>
+
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>
